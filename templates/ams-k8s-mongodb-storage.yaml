@@ -13,6 +13,7 @@ spec:
   hostPath:
     path: "/data/db/"
 ---
+{{- if and .Values.persistence.config.enabled (not .Values.persistence.config.existingClaim) }}
 kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
@@ -28,3 +29,4 @@ spec:
   resources:
     requests:
       storage: 10Gi
+{{- end -}}

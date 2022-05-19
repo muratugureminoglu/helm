@@ -8,6 +8,7 @@ metadata:
     nginx.ingress.kubernetes.io/session-cookie-name: "route"
     nginx.ingress.kubernetes.io/session-cookie-expires: "172800"
     nginx.ingress.kubernetes.io/session-cookie-max-age: "172800"
+    cert-manager.io/cluster-issuer: letsencrypt-prod
 spec:
   rules:
   {{- range .Values.ingress.hosts }}  
@@ -28,5 +29,5 @@ spec:
       {{- range .hosts }}
         - {{ . | quote }}
       {{- end }}
-      secretName: ant-media-server
+      secretName: antmedia-tls
   {{- end }}

@@ -1,8 +1,6 @@
 kind: PersistentVolume
 apiVersion: v1
 metadata:
-  annotations:
-    "helm.sh/resource-policy": keep
   name: mongodb-volume
   labels:
     type: local
@@ -19,6 +17,10 @@ kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
   name: mongodb-volume-claim
+  {{- if .Values.persistence.config.skipuninstall }}
+  annotations:
+    "helm.sh/resource-policy": keep
+  {{- end }}
 spec:
   storageClassName: manual
   accessModes:

@@ -1,7 +1,8 @@
 kind: PersistentVolume
 apiVersion: v1
-annotations: "helm.sh/resource-policy": keep
 metadata:
+  annotations:
+    "helm.sh/resource-policy": keep
   name: mongodb-volume
   labels:
     type: local

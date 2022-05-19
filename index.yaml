@@ -13,7 +13,7 @@ entries:
     name: antmedia-helm
     type: application
     urls:
-    - https://github.com/muratugureminoglu/helm/antmedia-helm-2.4.2.tgz
+    - https://raw.githubusercontent.com/muratugureminoglu/helm/master/antmedia-helm-2.4.2.tgz
     version: 2.4.2
   nginx-ingress:
   - apiVersion: v1

@@ -1,4 +1,4 @@
 #!/bin/bash
-
-rm *.tar.gz
-helm 
+helm uninstall antmedia 
+rm *.tgz
+helm package $(pwd/).

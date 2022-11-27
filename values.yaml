@@ -68,11 +68,18 @@ resources: {}
   #   cpu: 100m
   #   memory: 128Mi
 
-autoscaling:
-  enabled: false
+autoscalingEdge:
+  enabled: true
   minReplicas: 1
-  maxReplicas: 100
-  targetCPUUtilizationPercentage: 80
+  maxReplicas: 10
+  targetCPUUtilizationPercentage: 60
+  # targetMemoryUtilizationPercentage: 80
+
+autoscalingOrigin:
+  enabled: true
+  minReplicas: 1
+  maxReplicas: 10
+  targetCPUUtilizationPercentage: 60
   # targetMemoryUtilizationPercentage: 80
 
 nodeSelector: {}
@@ -81,6 +88,15 @@ tolerations: []
 
 affinity: {}
 
+origin: {}
+edge: {}
+mongoDB: mongo
+
+
+image:
+  repository: antmedia/enterprise
+  tag: latest
+  pullPolicy: IfNotPresent
 
 ingress:
   ## @param ingress.enabled Enable ingress record generation for WordPress

@@ -7,6 +7,14 @@ spec:
     apiVersion: apps/v1
     kind: Deployment
     name: ant-media-server-origin
-  minReplicas: 1
-  maxReplicas: 10
-  targetCPUUtilizationPercentage: 60
+  minReplicas: {{ .Values.autoscalingOrigin.minReplicas }}
+  maxReplicas: {{ .Values.autoscalingOrigin.maxReplicas }}
+  targetCPUUtilizationPercentage: {{ .Values.autoscalingOrigin.targetCPUUtilizationPercentage }}
+
+
+
+
+
+
+
+

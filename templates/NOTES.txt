@@ -11,3 +11,6 @@ Edge MaxReplicas: {{ .Values.autoscalingEdge.maxReplicas }}
 Edge CPU Utilization Percentage: {{ .Values.autoscalingEdge.targetCPUUtilizationPercentage }}
 {{end}}
 
+################################################################################
+# If you have any questions, please just send a message to support@antmedia.io # 
+################################################################################

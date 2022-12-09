@@ -55,7 +55,7 @@ helm install antmedia --set origin=origin.antmedia.io --set edge=edge.antmedia.i
 ```
 
 
-| Parameter                                      | Description                                                                                              | Default                                                                            |
+| Parameter                                | Description                                                                                              | Default                                                                            |
 |------------------------------------------------| -------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
 | `image`                                        | image repository                                                                                         | `antmedia/enterprise:latest` |
 | `origin`                                       | Domain name of Origin server                                                                             | `{}`                                                                        |

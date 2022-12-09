@@ -36,26 +36,7 @@ helm delete antmedia
 
 ## Parameters
 
-* **origin** = Domain name of Origin server
-* **edge** = Domain name of Edge Server
-* **autoscalingEdge.targetCPUUtilizationPercentage** = default 60
-* **autoscalingOrigin.targetCPUUtilizationPercentage** = default 60
-* **autoscalingEdge.minReplicas** = default 1 
-* **autoscalingOrigin.minReplicas** = default 1
-* **autoscalingEdge.maxReplicas** = default 10
-* **autoscalingOrigin.maxReplicas** = default 10
-* **hostNetwork** = default true
-* **mongodb** = MongoDB host (default internal MongoDB)
-* **image** = A container image (default Ant Media Officially repo)
-
-## Example Usage
-```
-helm install antmedia --set origin=origin.antmedia.io --set edge=edge.antmedia.io --set autoscalingEdge.targetCPUUtilizationPercentage=20 --set autoscalingEdge.minReplicas=2
-
-```
-
-
-| Parameter                                | Description                                                                                              | Default                                                                            |
+| Parameter                               | Description                                                                                              | Default                                                                            |
 |------------------------------------------------| -------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
 | `image`                                        | image repository                                                                                         | `antmedia/enterprise:latest` |
 | `origin`                                       | Domain name of Origin server                                                                             | `{}`                                                                        |
@@ -68,3 +49,13 @@ helm install antmedia --set origin=origin.antmedia.io --set edge=edge.antmedia.i
 | `autoscalingEdge.targetCPUUtilizationPercentage`                                 | Number of controller pods to run, only one will be active due to leader election                         | `60`                                                                                |
 | `autoscalingEdge.minReplicas`                          | Limit the disruption for controller pods. Require at least 2 controller replicas and 3 worker nodes      | `1`                                                                               |
 | `autoscalingEdge.maxReplicas`                               | Defines the update strategy for the deployment                                                           | `10`                                                                               |
+
+
+
+## Example Usage
+```
+helm install antmedia --set origin=origin.antmedia.io --set edge=edge.antmedia.io --set autoscalingEdge.targetCPUUtilizationPercentage=20 --set autoscalingEdge.minReplicas=2
+
+```
+
+

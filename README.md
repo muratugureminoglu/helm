@@ -55,3 +55,16 @@ helm install antmedia --set origin=origin.antmedia.io --set edge=edge.antmedia.i
 ```
 
 
+| Parameter                                      | Description                                                                                              | Default                                                                            |
+|------------------------------------------------| -------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
+| `image`                                        | image repository                                                                                         | `antmedia/enterprise:latest` |
+| `origin`                                       | Domain name of Origin server                                                                             | `{}`                                                                        |
+| `edge`                                         | Domain name of Edge server                                                                               | `{}`                                                                     |
+| `hostNetwork`                                  | If `false`, use turn server                                                                              | `true`                                                                            |
+| `mongodb`                                      | MongoDB host                                                                                             | `mongo`                                                                     |
+| `autoscalingOrigin.targetCPUUtilizationPercentage`                            | Extra volume mounts for the pod                                                                          | `[]`                                                                               |
+| `autoscalingOrigin.minReplicas`                                 | Extra volumes for the pod                                                                                | `[]`                                                                               |
+| `autoscalingOrigin.maxReplicas`                                  | Default tags to apply to all AWS resources managed by this controller                                    | `{}`                                                                               |
+| `autoscalingEdge.targetCPUUtilizationPercentage`                                 | Number of controller pods to run, only one will be active due to leader election                         | `2`                                                                                |
+| `autoscalingEdge.minReplicas`                          | Limit the disruption for controller pods. Require at least 2 controller replicas and 3 worker nodes      | `{}`                                                                               |
+| `autoscalingEdge.maxReplicas`                               | Defines the update strategy for the deployment                                                           | `{}`                                                                               |

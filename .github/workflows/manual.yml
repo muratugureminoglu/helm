@@ -36,5 +36,5 @@ jobs:
           automatic_release_tag: ${{ steps.version.outputs.version }}
           prerelease: false
           files: |
-            antmedia-2.5.3.tgz
+            antmedia-${{ steps.version.outputs.version }}.tgz
 

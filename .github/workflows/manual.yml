@@ -24,7 +24,7 @@ jobs:
           git config --global user.name  ${{ github.actor }}
           git status
           git add *
-          git commit -m "Add a new release {{ steps.version.outputs.version }} of Ant Media Server Helm package"
+          git commit -m "Add a new release of Ant Media Server Helm package"
       - name: Push changes  # push the output folder to your repo
         uses: ad-m/github-push-action@master
         with:

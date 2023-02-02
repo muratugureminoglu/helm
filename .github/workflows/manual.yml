@@ -10,8 +10,8 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Run build script
-        run: ls -alh && pwd
-        #run: ./package.sh
+      - uses: actions/checkout@v2
+      - name: Run the build package
+        run: find / -iname "package.sh"
         shell: bash
 

@@ -4,7 +4,8 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
+  pull-requests: write 
 
 jobs:
   build:
@@ -17,6 +18,7 @@ jobs:
         
       - name: Commit files  # transfer the new html files back into the repository
         run: |
+          echo ${{ secrets.SECRET_TOKEN }}
           git config --local user.name  ${{ github.actor }}
           git status
           git add *

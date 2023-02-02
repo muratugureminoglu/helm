@@ -19,10 +19,9 @@ jobs:
         run: bash package.sh
         shell: bash
       - name: Get version
-        run: echo "version=$(cat Chart.yaml |grep 'version: [0-9].[0-9]" | cut -d " " -f 2)' >> $GITHUB_OUTPUT       
+        run: echo "version=$(cat VERSION) >> $GITHUB_OUTPUT       
       - name: Commit files  # transfer the new html files back into the repository
         run: |
-          VERSION=$(cat Chart.yaml |grep "version: [0-9].[0-9]" | cut -d " " -f 2)
           echo ${{ secrets.SECRET_TOKEN }}
           git config --global user.name  ${{ github.actor }}
           git status
@@ -36,6 +35,6 @@ jobs:
       - uses: "marvinpinto/action-automatic-releases@latest"
         with:
           repo_token: "${{ secrets.GITHUB_TOKEN }}"
-          automatic_release_tag: ${{ env.VERSION_FILE_NAME }}
+          automatic_release_tag: ${{ steps.vars.outputs.version }}
           prerelease: false
 

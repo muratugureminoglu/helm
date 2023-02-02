@@ -35,4 +35,6 @@ jobs:
           repo_token: "${{ secrets.GITHUB_TOKEN }}"
           automatic_release_tag: ${{ steps.version.outputs.version }}
           prerelease: false
+          files: |
+            antmedia-2.5.3.tgz
 

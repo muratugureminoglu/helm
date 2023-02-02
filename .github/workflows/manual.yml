@@ -19,6 +19,7 @@ jobs:
         run: bash package.sh
         shell: bash
       - name: Get version
+        id: vars
         run: echo "version=$(cat VERSION)" >> $GITHUB_OUTPUT       
       - name: Commit files  # transfer the new html files back into the repository
         run: |

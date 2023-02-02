@@ -19,7 +19,7 @@ jobs:
         run: bash package.sh
         shell: bash
       - name: Get version
-        run: echo "version=$(cat VERSION) >> $GITHUB_OUTPUT       
+        run: echo "version=$(cat VERSION)" >> $GITHUB_OUTPUT       
       - name: Commit files  # transfer the new html files back into the repository
         run: |
           echo ${{ secrets.SECRET_TOKEN }}

@@ -12,6 +12,6 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Run the build package
-        run: cd .. && ls -alh && cd .. && ls -alh
+        run: ls -alh && cd .. && ls -alh && cd .. && ls -alh
         shell: bash
 

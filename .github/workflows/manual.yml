@@ -11,6 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Run build script
-        run: ./package.sh
+        run: ls -alh && pwd
+        #run: ./package.sh
         shell: bash
 

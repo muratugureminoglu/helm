@@ -12,6 +12,6 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Run the build package
-        run: find / -iname "package.sh"
+        run: cd .. && ls -alh && cd .. && ls -alh
         shell: bash
 

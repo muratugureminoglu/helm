@@ -6,6 +6,9 @@ on:
 permissions:
   contents: write
   pull-requests: write 
+  
+env:
+  VERSION_FILE_NAME: '2.5.3'
 
 jobs:
   build:
@@ -32,6 +35,6 @@ jobs:
       - uses: "marvinpinto/action-automatic-releases@latest"
         with:
           repo_token: "${{ secrets.GITHUB_TOKEN }}"
-         # automatic_release_tag: "${{ VERSION }}"
+          automatic_release_tag: ${{ env.VERSION_FILE_NAME }}
           prerelease: false
 

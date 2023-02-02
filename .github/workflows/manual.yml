@@ -22,7 +22,7 @@ jobs:
         run: |
           echo ${{ secrets.SECRET_TOKEN }}
           git config --global user.name  ${{ github.actor }}
-          git config --global --global user.email murat@murat.ws
+          #git config --global --global user.email murat@murat.ws
           git add *
           git commit -m "Add a new release of Ant Media Server Helm package"
       - name: Push changes 

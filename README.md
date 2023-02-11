@@ -102,4 +102,3 @@ helm install antmedia antmedia/antmedia --set origin=origin.antmedia.io --set ed
 
 ```
 
-

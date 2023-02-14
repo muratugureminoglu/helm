@@ -2,5 +2,5 @@
 remote: origin
 target-branch: master
 chart-dirs:
-  - .
+  - ./templates/
 helm-extra-args: --timeout 600s

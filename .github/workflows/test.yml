@@ -25,6 +25,8 @@ jobs:
       - name: Run chart-testing (list-changed)
         id: list-changed
         run: |
+          pwd
+          ls -alh
           changed=$(ct list-changed --config muratugureminoglu/.github/workflows/ct.yaml)
           if [[ -n "$changed" ]]; then
             echo "{changed}={true}" >> $GITHUB_OUTPUT

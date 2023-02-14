@@ -38,4 +38,7 @@ jobs:
         if: ${{ needs.list-changed.outputs.changed }} == 'true'
 
       - name: Run chart-testing (install)
-        run: ct install --config muratugureminoglu/.github/workflows/ct.yaml
+        run: |
+          pwd
+          ls -alh
+          ct install --config muratugureminoglu/.github/workflows/ct.yaml

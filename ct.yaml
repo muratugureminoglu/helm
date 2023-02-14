@@ -1,5 +1,5 @@
 target-branch: master
 chart-dirs:
-  - ./.
+  - muratugureminoglu/helm/
 helm-extra-args: --timeout 600s
 check-version-increment: false

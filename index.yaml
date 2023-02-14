@@ -2,8 +2,8 @@ apiVersion: v1
 entries:
   antmedia:
   - apiVersion: v2
-    appVersion: 1.5.1
-    created: "2023-02-14T07:16:04.392876911Z"
+    appVersion: 1.5.3
+    created: "2023-02-14T07:24:44.989751368Z"
     dependencies:
     - name: ingress-nginx
       repository: https://kubernetes.github.io/ingress-nginx
@@ -12,7 +12,7 @@ entries:
       repository: https://kubernetes-sigs.github.io/metrics-server
       version: <= 3.8.3
     description: A Helm chart for Kubernetes
-    digest: 8b06aa2c6cb57d57f293c64e39359c81ec82e5241f2891060dfdac2ca3c5c532
+    digest: ab77076691b1369d35c660d2c2f2ec5e5161ea839376ece3555ec23b616b8ecb
     name: antmedia
     type: application
     urls:
@@ -60,7 +60,7 @@ entries:
       artifacthub.io/prerelease: "false"
     apiVersion: v2
     appVersion: 1.5.1
-    created: "2023-02-14T07:16:04.397079796Z"
+    created: "2023-02-14T07:24:44.993361676Z"
     description: Ingress controller for Kubernetes using NGINX as a reverse proxy
       and load balancer
     digest: 5c5ffcd4a19377f9e2eeb40fd8c0a2a7a9f851db74453247c357c83e1775c330
@@ -99,7 +99,7 @@ entries:
           description: "Updated Metrics Server image to v0.6.2."
     apiVersion: v2
     appVersion: 0.6.2
-    created: "2023-02-14T07:16:04.397935414Z"
+    created: "2023-02-14T07:24:44.994218178Z"
     description: Metrics Server is a scalable, efficient source of container resource
       metrics for Kubernetes built-in autoscaling pipelines.
     digest: 6321fffa4bb34de22aee439a6893db329ff784e977e2204b5b57e8468ceb0e52
@@ -123,4 +123,4 @@ entries:
     urls:
     - https://ant-media.github.io/helm/charts/metrics-server-3.8.3.tgz
     version: 3.8.3
-generated: "2023-02-14T07:16:04.387775808Z"
+generated: "2023-02-14T07:24:44.984363057Z"

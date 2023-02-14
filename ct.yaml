@@ -1,5 +1,5 @@
 target-branch: master
 chart-dirs:
-  - chart
+  - .
 helm-extra-args: --timeout 600s
 check-version-increment: false

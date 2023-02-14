@@ -43,4 +43,4 @@ jobs:
         run: |
           pwd
           ls -alh
-          ct install --config muratugureminoglu/.github/workflows/ct.yaml
+          ct install --config .github/workflows/ct.yaml

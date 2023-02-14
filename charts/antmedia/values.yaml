@@ -25,6 +25,8 @@ origin: origin.antmedia.cloud
 edge: edge.antmedia.cloud
 mongoDB: mongo
 
+licenseKey: "test123"
+
 hostNetwork: true
 
 provider:

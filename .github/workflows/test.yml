@@ -13,6 +13,8 @@ jobs:
 
       - name: Set up Helm
         uses: azure/setup-helm@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Set up Python
         uses: actions/setup-python@v4

@@ -1,4 +1,4 @@
-target-branch: main
+target-branch: master
 chart-dirs:
   - charts
 helm-extra-args: --timeout 600s

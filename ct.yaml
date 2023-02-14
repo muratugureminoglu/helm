@@ -3,4 +3,6 @@ remote: origin
 target-branch: master
 chart-dirs:
   - .
+  - templates
+  - tests
 helm-extra-args: --timeout 600s

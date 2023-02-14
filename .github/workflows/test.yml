@@ -33,10 +33,7 @@ jobs:
 
       - name: Run chart-testing (lint)
         run: |
-          helm dep update
-          helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
           ct lint --config ct.yaml
-
       - name: Create kind cluster
         uses: helm/kind-action@v1.2.0
         with:

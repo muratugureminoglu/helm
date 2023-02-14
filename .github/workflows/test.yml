@@ -29,13 +29,13 @@ jobs:
         run: |
           pwd
           ls -alh
-          changed=$(ct list-changed --config .github/workflows/ct.yaml)
+          changed=$(ct list-changed --config ct.yaml)
           if [[ -n "$changed" ]]; then
             echo "{changed}={true}" >> $GITHUB_OUTPUT
           fi
 
       - name: Run chart-testing (lint)
-        run: ct lint --config .github/workflows/ct.yaml
+        run: ct lint --config ct.yaml
 
       - name: Create kind cluster
         uses: helm/kind-action@v1.5.0
@@ -45,6 +45,6 @@ jobs:
         run: |
           pwd
           ls -alh
-          ct install --config .github/workflows/ct.yaml
+          ct install --config ct.yaml
           
           

@@ -2,7 +2,7 @@ apiVersion: v2
 name: antmedia
 description: A Helm chart for Kubernetes
 type: application
-version: 2.5.3
+version: 2.5.5
 appVersion: "1.5.1"
 maintainers:
   - name: muratugureminoglu

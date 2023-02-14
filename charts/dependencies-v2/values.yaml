@@ -1,4 +1,4 @@
 redis:
-  enabled: true
+  enabled: false
   cluster:
     enabled: false

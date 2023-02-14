@@ -76,3 +76,4 @@ spec:
        app.kubernetes.io/instance: coturn
        app.kubernetes.io/version: 0.0.1
 {{end}}
+

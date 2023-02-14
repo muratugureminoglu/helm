@@ -30,3 +30,5 @@ hostNetwork: true
 provider:
   aws: false
   default: true
+  
+licenseKey: test

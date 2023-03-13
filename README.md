@@ -1,3 +1,5 @@
+![GitHub release (latest by date)](https://img.shields.io/github/v/release/muratugureminoglu/helm)
+
 # Ant Media Server 
 
 Ant Media Server Helm chart for Kubernetes

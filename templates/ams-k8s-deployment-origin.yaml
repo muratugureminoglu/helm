@@ -33,7 +33,8 @@ spec:
               - key: app
                 operator: In
                 values:
-                - ant-media
+                - ant-media-origin
+                - ant-media-edge
             topologyKey: "kubernetes.io/hostname"
       hostNetwork: {{ .Values.hostNetwork }}
       {{end}}
@@ -43,3 +44,11 @@ spec:
         image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}" 
         imagePullPolicy: {{ .Values.image.pullPolicy }}   
         args: ["-g", "true", "-s", "true", "-r", "true", "-m", "cluster", "-h", "{{ .Values.mongoDB }}", "-l", "{{ .Values.licenseKey }}"]
+        {{- if .Values.OriginNodeSelector }}
+        {{- with .Values.affinityNode }}
+        {{ toYaml . | nindent 6 }}
+        {{- end }}
+        {{ "values:" | indent 8 }}
+        {{ "-" | indent 8  }}{{ .Values.OriginNodeSelector | indent 1 }} 
+        {{- end }}
+

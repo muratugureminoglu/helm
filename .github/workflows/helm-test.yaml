@@ -20,7 +20,7 @@ jobs:
         run: |
           pwd
           ls -alh
-          helm dependency update .  # Replace with the actual path to your chart directory
+          helm dependency update ./  # Replace with the actual path to your chart directory
 
       - name: Lint Helm chart
         run: |

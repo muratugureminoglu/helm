@@ -1,0 +1,49 @@
+name: Helm Chart Test
+
+on:
+  push:
+    branches:
+      - master  # Replace with your main branch name or specify branches to trigger the workflow on
+  pull_request:
+    branches:
+      - master  # Replace with your main branch name or specify branches to trigger the workflow on
+
+jobs:
+  test:
+    runs-on: ubuntu-latest  # Choose the appropriate runner for your needs
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Minikube
+        uses: azure/setup-minikube@v1  # You can use a different Minikube setup action based on your requirements
+
+      - name: Start Minikube
+        run: minikube start --driver=docker
+
+      - name: Install Helm
+        run: |
+          curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash
+
+      - name: Install dependencies
+        run: |
+          helm dependency update .  # Replace with the actual path to your chart directory
+
+      - name: Lint Helm chart
+        run: |
+          helm lint .  # Replace with the actual path to your chart directory
+
+      - name: Deploy Helm chart to Minikube
+        run: |
+          helm install antmedia antmedia/antmedia --set origin=origin.antmedia.cloud --set edge=edge.antmedia.cloud  # Replace with the actual path to your chart directory and provide any necessary values
+
+      # Add additional steps here for running further tests, such as integration tests, validation checks, or any other Helm-related tests.
+
+      - name: Uninstall Helm release
+        run: |
+          helm uninstall myrelease  # Replace with the name of your Helm release
+
+      - name: Stop Minikube
+        run: minikube stop
+

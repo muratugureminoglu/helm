@@ -21,7 +21,8 @@ jobs:
 
       - name: Install dependencies
         run: |
-          helm dependency update ./.
+          cd 
+          helm dependency update .
 
       - name: Lint Helm chart
         run: |

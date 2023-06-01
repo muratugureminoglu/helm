@@ -1,9 +1,12 @@
-name: Helm Test
+name: Helm Chart Test
 
 on:
   push:
     branches:
-      - master  # Replace with your main branch name or specify branches to trigger the workflow on
+      - main  # Replace with your main branch name or specify branches to trigger the workflow on
+  pull_request:
+    branches:
+      - main  # Replace with your main branch name or specify branches to trigger the workflow on
 
 jobs:
   test:
@@ -13,18 +16,34 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Set up Helm
-        uses: azure/setup-helm@v1  # You can use a different Helm setup action based on your requirements
+      - name: Set up Minikube
+        uses: azure/setup-minikube@v1  # You can use a different Minikube setup action based on your requirements
+
+      - name: Start Minikube
+        run: minikube start --driver=docker
+
+      - name: Install Helm
+        run: |
+          curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash
 
       - name: Install dependencies
         run: |
-          pwd
-          ls -alh
-          helm dependency update /home/runner/work/helm/helm  # Replace with the actual path to your chart directory
+          helm dependency update .
 
       - name: Lint Helm chart
         run: |
-          helm lint .  # Replace with the actual path to your chart directory
+          helm lint path/to/your/chart  # Replace with the actual path to your chart directory
 
-      # Add additional steps here for running further tests, such as integration tests or validation checks.
+      - name: Deploy Helm chart to Minikube
+        run: |
+          helm install myrelease path/to/your/chart --set someValue=someData  # Replace with the actual path to your chart directory and provide any necessary values
+
+      # Add additional steps here for running further tests, such as integration tests, validation checks, or any other Helm-related tests.
+
+      - name: Uninstall Helm release
+        run: |
+          helm uninstall myrelease  # Replace with the name of your Helm release
+
+      - name: Stop Minikube
+        run: minikube stop
 

@@ -3,10 +3,10 @@ name: Helm Chart Test
 on:
   push:
     branches:
-      - main  # Replace with your main branch name or specify branches to trigger the workflow on
+      - master  # Replace with your main branch name or specify branches to trigger the workflow on
   pull_request:
     branches:
-      - main  # Replace with your main branch name or specify branches to trigger the workflow on
+      - master  # Replace with your main branch name or specify branches to trigger the workflow on
 
 jobs:
   test:

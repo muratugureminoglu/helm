@@ -19,9 +19,9 @@ jobs:
       - name: Set up Helm
         uses: azure/setup-helm@v1  # You can use a different Helm setup action based on your requirements
 
-#      - name: Install dependencies
-#        run: |
-#          helm dependency update .
+      - name: Install dependencies
+        run: |
+          helm dependency update .
 
       - name: Lint Helm chart
         run: |

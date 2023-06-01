@@ -40,7 +40,7 @@ jobs:
 
       - name: Deploy Helm chart to Minikube
         run: |
-          helm install antmedia antmedia/antmedia --set origin=origin.antmedia.cloud --set edge=edge.antmedia.cloud  # Replace with the actual path to your chart directory and provide any necessary values
+          helm install antmedia antmedia-2.5.3.tgz --set origin=origin.antmedia.cloud --set edge=edge.antmedia.cloud  # Replace with the actual path to your chart directory and provide any necessary values
 
       # Add additional steps here for running further tests, such as integration tests, validation checks, or any other Helm-related tests.
 

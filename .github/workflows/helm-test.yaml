@@ -3,7 +3,7 @@ name: Helm Test
 on:
   push:
     branches:
-      - main  # Replace with your main branch name or specify branches to trigger the workflow on
+      - master  # Replace with your main branch name or specify branches to trigger the workflow on
 
 jobs:
   test:
@@ -18,11 +18,11 @@ jobs:
 
       - name: Install dependencies
         run: |
-          helm dependency update path/to/your/chart  # Replace with the actual path to your chart directory
+          helm dependency update .  # Replace with the actual path to your chart directory
 
       - name: Lint Helm chart
         run: |
-          helm lint path/to/your/chart  # Replace with the actual path to your chart directory
+          helm lint .  # Replace with the actual path to your chart directory
 
       # Add additional steps here for running further tests, such as integration tests or validation checks.
 

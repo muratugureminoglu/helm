@@ -25,7 +25,7 @@ jobs:
 
       - name: Lint Helm chart
         run: |
-          helm lint .
+          sudo helm lint .
 
       # Add additional steps here for running further tests, such as integration tests, validation checks, or any other Helm-related tests.
 

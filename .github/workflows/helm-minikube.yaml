@@ -3,14 +3,14 @@ name: Helm Chart Test
 on:
   push:
     branches:
-      - master  # Replace with your main branch name or specify branches to trigger the workflow on
+      - add_helm_repo  
   pull_request:
     branches:
-      - master  # Replace with your main branch name or specify branches to trigger the workflow on
+      - add_helm_repo
 
 jobs:
-  test:
-    runs-on: ubuntu-latest  # Choose the appropriate runner for your needs
+  repository-tests:
+    runs-on: ubuntu-latest  
 
     steps:
       - name: Checkout code
@@ -32,24 +32,21 @@ jobs:
 
       - name: Install dependencies
         run: |
-          helm dependency update .  # Replace with the actual path to your chart directory
+          helm dependency update .  
 
       - name: Lint Helm chart
         run: |
-          helm lint .  # Replace with the actual path to your chart directory
+          helm lint .  
 
       - name: Deploy Helm chart to Minikube
         run: |
           helm repo add antmedia https://ant-media.github.io/helm
           helm repo update
-          helm install antmedia antmedia/antmedia --set origin=origin.antmedia.cloud --set edge=edge.antmedia.cloud  # Replace with the actual path to your chart directory and provide any necessary values
-
-      # Add additional steps here for running further tests, such as integration tests, validation checks, or any other Helm-related tests.
+          helm install antmedia antmedia/antmedia --set origin=origin.antmedia.cloud --set edge=edge.antmedia.cloud 
 
       - name: Uninstall Helm release
         run: |
-          helm uninstall antmedia  # Replace with the name of your Helm release
+          helm uninstall antmedia  
 
       - name: Stop Minikube
         run: minikube stop
-

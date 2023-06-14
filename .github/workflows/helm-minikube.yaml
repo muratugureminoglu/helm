@@ -20,30 +20,6 @@ jobs:
       - name: Run the build package
         run: bash package.sh
         shell: bash
-      - name: Get version
-        id: version
-        run: echo "version=$(cat VERSION)" >> $GITHUB_OUTPUT       
-      - name: Commit files  
-        run: |
-          git config --global user.name  ${{ github.actor }}
-          git config --global user.email "murat@murat.ws"
-          git add *
-          git commit -m "${{ github.event.head_commit.message }}"
-          
-      - name: Push changes  
-        uses: ad-m/github-push-action@master
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          force: true
-      - uses: "marvinpinto/action-automatic-releases@latest"
-        with:
-          repo_token: "${{ secrets.GITHUB_TOKEN }}"
-          if: steps.version.outputs.released == 'true
-          automatic_release_tag: ${{ steps.version.outputs.version }}
-          prerelease: true
-          files: |
-            antmedia-${{ steps.version.outputs.version }}.tgz
-
   test:
     needs: build
     runs-on: ubuntu-latest  
@@ -89,3 +65,31 @@ jobs:
 
       - name: Stop Minikube
         run: minikube stop
+  release:
+      needs: build
+      runs-on: ubuntu-latest
+      steps:
+        - name: Get version
+          id: version
+          run: echo "version=$(cat VERSION)" >> $GITHUB_OUTPUT       
+        - name: Commit files  
+          run: |
+            git config --global user.name  ${{ github.actor }}
+            git config --global user.email "murat@murat.ws"
+            git add *
+            git commit -m "${{ github.event.head_commit.message }}"
+
+        - name: Push changes  
+          uses: ad-m/github-push-action@master
+          with:
+            github_token: ${{ secrets.GITHUB_TOKEN }}
+            force: true
+        - uses: "marvinpinto/action-automatic-releases@latest"
+          with:
+            repo_token: "${{ secrets.GITHUB_TOKEN }}"
+            if: steps.version.outputs.released == 'true
+            automatic_release_tag: ${{ steps.version.outputs.version }}
+            prerelease: false
+            files: |
+              antmedia-${{ steps.version.outputs.version }}.tgz
+    

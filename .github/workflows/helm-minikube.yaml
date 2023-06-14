@@ -69,6 +69,7 @@ jobs:
       needs: test
       runs-on: ubuntu-latest
       steps:
+        - uses: actions/checkout@v3
         - name: Get version
           id: version
           run: echo "version=$(cat VERSION)" >> $GITHUB_OUTPUT       

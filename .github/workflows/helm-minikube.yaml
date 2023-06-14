@@ -40,7 +40,7 @@ jobs:
           repo_token: "${{ secrets.GITHUB_TOKEN }}"
           if: steps.version.outputs.released == 'true
           automatic_release_tag: ${{ steps.version.outputs.version }}
-          prerelease: false
+          prerelease: true
           files: |
             antmedia-${{ steps.version.outputs.version }}.tgz
 

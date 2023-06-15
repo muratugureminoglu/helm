@@ -20,6 +20,12 @@ jobs:
       - name: Run the build package
         run: bash package.sh
         shell: bash
+      - name: Commit files  
+        run: |
+          git config --global user.name  ${{ github.actor }}
+          git config --global user.email "murat@murat.ws"
+          git add *
+          git commit -m "${{ github.event.head_commit.message }}"
   test:
     needs: build
     runs-on: ubuntu-latest  

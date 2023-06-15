@@ -2,7 +2,7 @@ name: Helm Chart Test
 
 on:
   push:
-    branches: [ "add_helm_repo" ]
+    branches: [ "master" ]
     paths-ignore:
       - '**/README.md'
       - '**/.github/**'

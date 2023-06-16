@@ -23,7 +23,7 @@ jobs:
         run: |
           git config --global user.name "Your GitHub Username"
           git config --global user.email "your-email@example.com"
-          branch_name="${{ github.ref }}"
+          branch_name="${{ github.event.inputs.branch_name }}"
           git checkout "$branch_name"
           git add .
           git commit -m "Commit message"

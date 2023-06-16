@@ -19,13 +19,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-        with:
-          repository: ${{ github.event.client_payload.pull_request.head.repo.full_name }}
-          ref: ${{ github.event.client_payload.pull_request.head.ref }}
-          path: ${{ github.event.repository.name }}
+      - name: Get staging branch name
+        id: branch_name
+        run: echo "staging_branch=$(git for-each-ref --format='%(refname:short)' refs/heads/staging*)" >> $GITHUB_OUTPUT
       - name: Push changes
         run: |
-          echo "Branch: ${{ github.event.repository.name }}"
-          echo "repository: ${{ github.event.client_payload.pull_request.head.ref }}"
+          echo "Branch: ${{ steps.branch_name.outputs.staging_branch }}"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

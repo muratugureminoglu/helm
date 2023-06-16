@@ -25,9 +25,7 @@ jobs:
           path: ${{ github.event.repository.name }}
       - name: Push changes
         run: |
-          echo "Env: ${{ github.event.inputs.environment }}" 
-          echo "Branch: ${{ github.event.inputs.branch }}"
           echo "Branch: ${{ github.event.repository.name }}"
-          echo "Ref: ${{ github.event.client_payload.pull_request.head.ref }}"
+          echo "repository: ${{ github.event.client_payload.pull_request.head.ref }}"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

@@ -29,13 +29,19 @@ jobs:
         run: |
           git config --global user.name  ${{ github.actor }}
           git config --global user.email "murat@murat.ws"
+          git status
           git add *
           git commit -m "${{ github.event.head_commit.message }}"
-      - name: Push changes  
-        uses: ad-m/github-push-action@master
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          force: true
+      - name: Push changes
+        run: |
+          git config --global user.name  ${{ github.actor }}
+          git config --global user.email "murat@murat.ws"
+          git checkout -b ${{ github.event.inputs.branch_name }}
+          git add .
+          git commit -m "${{ github.event.head_commit.message }}"
+          git push origin ${{ github.event.inputs.branch_name }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   test:
     needs: build
     runs-on: ubuntu-latest  

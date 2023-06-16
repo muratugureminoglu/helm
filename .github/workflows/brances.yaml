@@ -36,10 +36,10 @@ jobs:
         run: |
           git config --global user.name  ${{ github.actor }}
           git config --global user.email "murat@murat.ws"
-          git checkout -b ${{ github.event.inputs.branch_name }}
+          git checkout -b "$branch_name"
           git add .
           git commit -m "${{ github.event.head_commit.message }}"
-          git push origin ${{ github.event.inputs.branch_name }}
+          git push origin "$branch_name"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   test:

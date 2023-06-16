@@ -81,12 +81,3 @@ jobs:
 
       - name: Stop Minikube
         run: minikube stop
-        
-      - uses: "marvinpinto/action-automatic-releases@latest"
-        with:
-          repo_token: "${{ secrets.GITHUB_TOKEN }}"
-          if: steps.version.outputs.released == 'true
-          automatic_release_tag: ${{ steps.version.outputs.version }}
-          prerelease: false
-          files: |
-            antmedia-${{ steps.version.outputs.version }}.tgz

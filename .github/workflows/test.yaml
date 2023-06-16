@@ -2,7 +2,8 @@ name: Internal Tests
 
 on:
   push:
-    branches: [ "master" ]
+    branches-ignore:
+      - master
     paths-ignore:
       - '**/README.md'
       - '**/.github/**'

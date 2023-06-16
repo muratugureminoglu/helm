@@ -21,12 +21,7 @@ jobs:
       - uses: actions/checkout@v3
       - name: Push changes
         run: |
-          git config --global user.name "Your GitHub Username"
-          git config --global user.email "your-email@example.com"
-          branch_name="${{ github.event.inputs.branch_name }}"
-          git checkout "$branch_name"
-          git add .
-          git commit -m "Commit message"
-          git push origin "$branch_name"
+          echo "Env: ${{ github.event.inputs.environment }}" 
+          echo "Branch: ${{ github.event.inputs.branch }}"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

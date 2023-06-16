@@ -9,7 +9,7 @@ image:
   repository: nginx
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: 2.6.1
+  tag: 2.5.3
 
 imagePullSecrets: []
 nameOverride: ""
@@ -101,7 +101,7 @@ hostNetwork: true
 
 image:
   repository: antmedia/enterprise
-  tag: 2.6.1
+  tag: 2.5.3
   pullPolicy: IfNotPresent
 
 provider:

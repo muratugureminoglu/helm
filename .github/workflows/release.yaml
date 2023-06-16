@@ -55,6 +55,7 @@ jobs:
       - name: Stop Minikube
         run: minikube stop
   release:
+      needs: test
       runs-on: ubuntu-latest  
       steps:
         - name: Checkout code

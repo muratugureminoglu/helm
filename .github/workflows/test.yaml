@@ -18,11 +18,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - name: check branch name  
+      - name: Push changes
         run: |
-          branch_name="${{ github.event.inputs.branch_name }}"
-          git fetch
-          git branch "$branch_name" origin/master
-          echo "$branch_name"
+          git config --global user.name "Your GitHub Username"
+          git config --global user.email "your-email@example.com"
+          branch_name="${{ github.ref }}"
+          git checkout "$branch_name"
+          git add .
+          git commit -m "Commit message"
+          git push origin "$branch_name"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

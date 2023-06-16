@@ -31,9 +31,9 @@ jobs:
         run: |
           git config --global user.name  ${{ github.actor }}
           git config --global user.email "murat@murat.ws"
-          branch_name="${{ github.event.pull_request.head.ref }}"
+        #  branch_name="${{ github.event.pull_request.head.ref }}"
           git status
-          git checkout "$branch_name"
+        #  git checkout "$branch_name"
           git add *
           git commit -m "${{ github.event.head_commit.message }}"
           git push origin "$branch_name"

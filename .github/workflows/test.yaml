@@ -27,14 +27,15 @@ jobs:
       - name: Get version
         id: version
         run: echo "version=$(cat VERSION)" >> $GITHUB_OUTPUT
-      - name: Push changes
+      - name: Commit files  
         run: |
           git config --global user.name  ${{ github.actor }}
           git config --global user.email "murat@murat.ws"
-          git status
-          branch_name="${{ github.event.pull_request.head.ref }}"
           git add *
-          git commit -m "${{ github.event.head_commit.message }}"
-          git push origin "$branch_name"
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          git commit -m "${{ github.event.head_commit.message }}"    
+      - name: Push changes
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: ${{ github.ref }}
+

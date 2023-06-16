@@ -1,4 +1,4 @@
-name: Helm Chart Test
+name: Internal Tests
 
 on:
   push:

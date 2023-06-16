@@ -1,7 +1,7 @@
 # Default values for antmedia-helm.
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
-# last-test-6
+# last-test-7
 
 replicaCount: 1
 

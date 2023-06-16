@@ -18,11 +18,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-        with:
-          ref: ${{ github.ref }}
       - name: check branch name  
         run: |
           branch_name="${{ github.event.inputs.branch_name }}"
+          git fetch
+          git branch "$branch_name" origin/master
           echo "$branch_name"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

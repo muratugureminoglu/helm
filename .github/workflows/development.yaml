@@ -71,6 +71,7 @@ jobs:
 
       - name: Deploy Helm chart to Minikube
         run: |
+          ls -alh
           helm install antmedia antmedia-${{ steps.version.outputs.version }}.tgz --set origin=origin.antmedia.cloud --set edge=edge.antmedia.cloud 
 
       - name: Uninstall Helm release

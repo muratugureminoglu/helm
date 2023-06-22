@@ -74,7 +74,7 @@ jobs:
       - name: Deploy Helm chart to Minikube
         run: |
           ls -alh
-          helm install antmedia antmedia-${{ steps.version.outputs.version }}.tgz --set origin=origin.antmedia.cloud --set edge=edge.antmedia.cloud 
+          helm install antmedia antmedia-${{ steps.version.outputs.version }}.tgz --set origin=origin.antmedia.cloud --set edge=edge.antmedia.cloud --namespace antmedia --create-namespace
       - name: Wait for containers to be ready
         run: |
           while true; do

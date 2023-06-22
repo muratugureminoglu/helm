@@ -75,7 +75,18 @@ jobs:
         run: |
           ls -alh
           helm install antmedia antmedia-${{ steps.version.outputs.version }}.tgz --set origin=origin.antmedia.cloud --set edge=edge.antmedia.cloud 
-
+      - name: Wait for containers to be ready
+        run: |
+          while true; do
+            STATUS=$(kubectl get pods -l app=antmedia -o jsonpath='{.items[0].status.containerStatuses[0].ready}')
+            if [ "$STATUS" == "true" ]; then
+              break
+            fi
+            sleep 5
+          done
+      - name: Test pod using curl
+        run: |
+          curl -s -o /dev/null -w "%{http_code}" http://$(minikube ip):5080
       - name: Uninstall Helm release
         run: |
           helm uninstall antmedia  

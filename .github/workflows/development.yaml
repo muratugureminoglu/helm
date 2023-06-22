@@ -92,7 +92,7 @@ jobs:
         id: curl_result
         run: |
           status_code=$(curl -s -o /dev/null -w "%{http_code}" http://${{ steps.minikube_ip.outputs.ip }}:5080)
-          echo "::set-output name=status_code::$status_code"
+    #      echo "::set-output name=status_code::$status_code"
       - name: Check curl result
         run: |
           if [[ "${{ steps.curl_result.outputs.status_code }}" -eq 200 ]]; then

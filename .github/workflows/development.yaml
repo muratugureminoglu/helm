@@ -85,17 +85,20 @@ jobs:
             fi
             sleep 5
           done
+      - name: Get Minikube IP
+        id: minikube_ip
+        run: echo "::set-output name=ip::$(minikube ip)"
       - name: Test pod using curl
         id: curl_result
         run: |
-          status_code=$(curl -s -o /dev/null -w "%{http_code}" http://$(minikube ip):5080)
+          status_code=$(curl -s -o /dev/null -w "%{http_code}" http://${{ steps.minikube_ip.outputs.ip }}:5080)
           echo "::set-output name=status_code::$status_code"
       - name: Check curl result
         run: |
           if [[ "${{ steps.curl_result.outputs.status_code }}" -eq 200 ]]; then
-            echo "Ant Media Server is running successfully."
+            echo "Application is running successfully."
           else
-            echo "Ant Media Server is not accessible. HTTP status code: ${{ steps.curl_result.outputs.status_code }}"
+            echo "Application is not accessible. HTTP status code: ${{ steps.curl_result.outputs.status_code }}"
             exit 1
           fi
       - name: Uninstall Helm release

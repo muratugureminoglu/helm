@@ -78,7 +78,7 @@ jobs:
       - name: Wait for containers to be ready
         run: |
           while true; do
-            STATUS=$(kubectl get pods -l app=antmedia -o jsonpath='{.items[0].status.containerStatuses[0].ready}')
+            STATUS=$(kubectl get pods -n antmedia -o jsonpath='{.items[0].status.containerStatuses[0].ready}')
             if [ "$STATUS" == "true" ]; then
               break
             fi

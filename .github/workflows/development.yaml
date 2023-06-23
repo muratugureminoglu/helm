@@ -1,9 +1,7 @@
 name: Internal Tests
 
 on:
-  push:
-    branches-ignore:
-      - master
+  pull_request:
     paths-ignore:
       - '**/README.md'
       - '**/.github/**'

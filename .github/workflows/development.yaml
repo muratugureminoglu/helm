@@ -39,7 +39,8 @@ jobs:
           git remote set-url origin https://github.com/muratugureminoglu/helm.git
           git config --global user.name  ${{ github.actor }}
           git config --global user.email "murat@murat.ws"
-          git push origin HEAD:${{ github.base_ref }}
+          git pull origin ${GITHUB_BASE_REF}
+          git push origin HEAD:${GITHUB_BASE_REF}
 
   test_local:
     needs: build

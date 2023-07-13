@@ -21,13 +21,17 @@ jobs:
         id: read-version
         run: echo "::set-output name=version::$(cat VERSION)"
 
+      - name: Set image name
+        id: set-image-name
+        run: echo "::set-env name=IMAGE_NAME::muratugureminoglu/antmedia"
+
       - name: Build Docker image
         run: docker build --network=host -t antmediaserver:${{ steps.read-version.outputs.version }} --build-arg AntMediaServer=latest.zip .
 
       - name: Tag Docker image
         run: |
-          docker tag $(docker images --format "{{.ID}}" --filter "reference=antmediaserver:${{ steps.read-version.outputs.version }}") antmedia/enterprise:${{ steps.read-version.outputs.version }}
-          docker tag $(docker images --format "{{.ID}}" --filter "reference=antmediaserver:${{ steps.read-version.outputs.version }}") antmedia/enterprise:latest
+          docker tag $(docker images --format "{{.ID}}" --filter "reference=antmediaserver:${{ steps.read-version.outputs.version }}") ${{ env.IMAGE_NAME }}:${{ steps.read-version.outputs.version }}
+          docker tag $(docker images --format "{{.ID}}" --filter "reference=antmediaserver:${{ steps.read-version.outputs.version }}") ${{ env.IMAGE_NAME }}:latest
 
       - name: Log in to Docker Hub
         uses: docker/login-action@v1
@@ -37,5 +41,5 @@ jobs:
 
       - name: Push Docker image
         run: |
-          docker push antmedia/enterprise:${{ steps.read-version.outputs.version }}
-          docker push antmedia/enterprise:latest
+          docker push ${{ env.IMAGE_NAME }}:${{ steps.read-version.outputs.version }}
+          docker push ${{ env.IMAGE_NAME }}:latest

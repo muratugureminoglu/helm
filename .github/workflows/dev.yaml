@@ -1,4 +1,4 @@
-name: Internal Tests
+name: Development Test
 
 on:
   pull_request:
@@ -45,10 +45,9 @@ jobs:
           git config --global user.name  ${{ github.actor }}
           git config --global user.email "murat@murat.ws"
           git push origin HEAD:${GITHUB_HEAD_REF}
-
   test_local:
     needs: build
-    runs-on: ubuntu-latest  
+    runs-on: self-hosted 
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -66,9 +65,9 @@ jobs:
 
       - name: Start Minikube
         run: |
-         whoami
          sudo usermod -aG docker $USER
          newgrp docker
+         sudo systemctl restart docker
          minikube start --driver=docker
 
       - name: Install Helm
@@ -87,9 +86,37 @@ jobs:
         run: |
           ls -alh
           helm install antmedia antmedia-${{ steps.version.outputs.version }}.tgz --set origin=origin.antmedia.cloud --namespace antmedia --create-namespace
+      - name: Wait for containers to be ready
+        run: |
+          while true; do
+            STATUS=$(kubectl get pods -n antmedia -o jsonpath='{.items[0].status.containerStatuses[0].ready}')
+            if [ "$STATUS" == "true" ]; then
+              break
+            fi
+            sleep 5
+          done
+      - name: Get Minikube IP
+        id: minikube_ip
+        run: echo "::set-output name=ip::$(minikube ip)"
+      - name: Test pod using curl
+        id: curl_result
+        run: |
+          sleep 30
+          status_code=$(curl -s -o /dev/null -w "%{http_code}" http://${{ steps.minikube_ip.outputs.ip }}:5080)
+          echo "::set-output name=status_code::$status_code"
+      - name: Check curl result
+        run: |
+          if [[ "${{ steps.curl_result.outputs.status_code }}" -eq 200 ]]; then
+            echo "Ant Media Server is running successfully."
+          else
+            echo "Ant Media Server is not accessible. HTTP status code: ${{ steps.curl_result.outputs.status_code }}"
+            exit 1
+          fi
       - name: Uninstall Helm release
         run: |
           helm uninstall antmedia -n antmedia
-
+    
       - name: Stop Minikube
         run: minikube stop
+      - name: Stop docker 
+        run: sudo systemctl stop docker

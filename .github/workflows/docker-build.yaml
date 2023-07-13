@@ -24,7 +24,7 @@ jobs:
 
       - name: Set image name
         id: set-image-name
-        run: echo "::set-env name=IMAGE_NAME::muratugureminoglu/antmedia"
+        run: echo "IMAGE_NAME=muratugureminoglu/antmedia" >> $GITHUB_ENV
 
       - name: Build Docker image
         run: docker build --network=host -t antmediaserver:${{ steps.read-version.outputs.version }} --build-arg AntMediaServer=latest.zip .

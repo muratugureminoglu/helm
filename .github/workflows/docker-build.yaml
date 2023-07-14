@@ -6,17 +6,11 @@ on:
 
 jobs:
   build-and-push:
-    #if: contains(github.event.head_commit.modified, 'VERSION')
-    #if: contains(github.event.modified_files, 'VERSION')
-    #if: ${{ github.event_changes.VERSION }}
-    #if: github.event.head_commit.modified_files contains 'VERSION'
-    #if: ${{ contains(github.event.head_commit.message, 'VERSION') }}
-    #if: ${{ contains(github.event.pull_request.changed_files, 'VERSION') }}
     if: ${{ contains(github.event.head_commit.message, 'VERSION') }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Download latest.zip
         run: wget --quiet ${{ secrets.LATEST_URL }}

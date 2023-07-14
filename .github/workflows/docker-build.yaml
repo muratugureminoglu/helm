@@ -7,7 +7,7 @@ jobs:
     #if: contains(github.event.head_commit.modified, 'VERSION')
     #if: contains(github.event.modified_files, 'VERSION')
     #if: ${{ github.event_changes.VERSION }}
-    if: ${{ contains(github.event.modified_files, 'VERSION') }}
+    if: github.event.head_commit.modified_files contains 'VERSION'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code

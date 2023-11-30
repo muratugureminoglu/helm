@@ -11,21 +11,13 @@ permissions:
   pull-requests: write 
       
 jobs:
-  build-and-push-image:
+  build-and-push:
     runs-on: ubuntu-latest
+    env:
+      DOCKER_URL: muratugureminoglu/antmedia
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
-      - name: Check if VERSION file changed
-        id: version-changed
-        run: |
-          changed_files=$(git diff --name-only ${{ github.event.before }} ${{ github.sha }} | grep 'VERSION' || true)
-          if [ -n "$changed_files" ]; then
-            echo "VERSION file changed. Continuing with the workflow."
-          else
-            echo "No changes in VERSION file. Skipping workflow."
-            exit 78
-          fi
 
       - name: Download latest.zip
         run: wget --quiet ${{ secrets.LATEST_URL }}
@@ -39,7 +31,7 @@ jobs:
 
       - name: Set image name
         id: set-image-name
-        run: echo "IMAGE_NAME=muratugureminoglu/antmedia" >> $GITHUB_ENV
+        run: echo "IMAGE_NAME=${{ env.DOCKER_URL }}" >> $GITHUB_ENV
 
       - name: Build Docker image
         run: docker build --network=host -t antmediaserver:${{ steps.read-version.outputs.version }} --build-arg AntMediaServer=latest.zip .
@@ -59,6 +51,11 @@ jobs:
         run: |
           docker push ${{ env.IMAGE_NAME }}:${{ steps.read-version.outputs.version }}
           docker push ${{ env.IMAGE_NAME }}:latest
+
+      - name: Set environment variable
+        run: echo "success=value" >> $GITHUB_ENV
+
+
   build:
     runs-on: ubuntu-latest
     steps:

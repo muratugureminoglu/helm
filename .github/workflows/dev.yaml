@@ -16,7 +16,7 @@ permissions:
   pull-requests: write 
 
 jobs:
-  build-and-push:
+  build-and-push-image:
     if: ${{ contains(github.event.head_commit.message, 'VERSION') }}
     runs-on: ubuntu-latest
     steps:
@@ -56,6 +56,7 @@ jobs:
           docker push ${{ env.IMAGE_NAME }}:${{ steps.read-version.outputs.version }}
           docker push ${{ env.IMAGE_NAME }}:latest
   build:
+    needs: build-and-push-image
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3

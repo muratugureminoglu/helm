@@ -11,7 +11,7 @@ on:
       - requested
   workflow_dispatch:
   workflow_run:
-    workflows: ["Development Test"]
+    workflows: ["Build and Push Docker Image"]
     types:
       - completed
 

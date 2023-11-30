@@ -1,17 +1,17 @@
 name: Development Test
 
 on:
-#  pull_request:
-#    paths-ignore:
-#      - '**/README.md'
-#      - '**/.github/**'
-#      - '**/package.sh'
-#  check_suite:
-#    types:
-#      - requested
-#  workflow_dispatch:
+  pull_request:
+    paths-ignore:
+      - '**/README.md'
+      - '**/.github/**'
+      - '**/package.sh'
+  check_suite:
+    types:
+      - requested
+  workflow_dispatch:
   workflow_run:
-    workflows: ["Build and Push Docker Image"]
+    workflows: ["Development Test"]
     types:
       - completed
 
@@ -25,7 +25,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
         with:
-          ref: ${{ github.head_ref }}
+          ref: ${{ github.event.pull_request.head.ref }}
       - name: Run the build package
         run: bash package.sh
         shell: bash
@@ -35,7 +35,7 @@ jobs:
       - name: Get commit message
         id: commit_message
         run: |
-          commit_message=$(git log --format=%B -n 1 ${{ github.sha }})
+          commit_message=$(git log --format=%B -n 1 ${{ github.event.pull_request.head.sha }})
           echo "::set-output name=commit_message::$commit_message"
       - name: Commit files  
         run: |
@@ -49,7 +49,6 @@ jobs:
           git config --global user.name  ${{ github.actor }}
           git config --global user.email "murat@murat.ws"
           git push origin HEAD:${GITHUB_HEAD_REF}
-
   test_local:
     needs: build
     runs-on: self-hosted 

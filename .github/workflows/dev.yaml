@@ -12,11 +12,20 @@ permissions:
       
 jobs:
   build-and-push-image:
-    if: ${{ contains(github.event.head_commit.message, 'VERSION') || github.event_name == 'workflow_dispatch' || github.event_name == 'pull_request' }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
+      - name: Check if VERSION file changed
+        id: version-changed
+        run: |
+          changed_files=$(git diff --name-only ${{ github.event.before }} ${{ github.sha }} | grep 'VERSION' || true)
+          if [ -n "$changed_files" ]; then
+            echo "VERSION file changed. Continuing with the workflow."
+          else
+            echo "No changes in VERSION file. Skipping workflow."
+            exit 78
+          fi
 
       - name: Download latest.zip
         run: wget --quiet ${{ secrets.LATEST_URL }}

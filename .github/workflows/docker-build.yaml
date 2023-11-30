@@ -2,12 +2,14 @@ name: Build and Push Docker Image
 on:
   push:
     branches:
-      - 'master1000'
+      - 'main'
 
 jobs:
   build-and-push:
     if: ${{ contains(github.event.head_commit.message, 'VERSION') }}
     runs-on: ubuntu-latest
+    env:
+      DOCKER_URL: muratugureminoglu/antmedia
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -24,7 +26,7 @@ jobs:
 
       - name: Set image name
         id: set-image-name
-        run: echo "IMAGE_NAME=muratugureminoglu/antmedia" >> $GITHUB_ENV
+        run: echo "IMAGE_NAME=${{ env.DOCKER_URL }}" >> $GITHUB_ENV
 
       - name: Build Docker image
         run: docker build --network=host -t antmediaserver:${{ steps.read-version.outputs.version }} --build-arg AntMediaServer=latest.zip .

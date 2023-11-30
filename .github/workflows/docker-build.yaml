@@ -45,6 +45,6 @@ jobs:
           docker push ${{ env.IMAGE_NAME }}:${{ steps.read-version.outputs.version }}
           docker push ${{ env.IMAGE_NAME }}:latest
 
-      - name: Set output for success
-        id: set-output
-        run: echo "success" >> $GITHUB_ENV
+      - name: Set environment variable
+        run: echo "success=value" >> $GITHUB_ENV
+
